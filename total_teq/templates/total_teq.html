@@ -1,4 +1,9 @@
 <form method=post action="">{% csrf_token %}
+ <head>
+        <title>Dioxin eggs</title>
+<body>
+<font face="calibri", font size = "4">
+	<p>Dioxin Transfer from feed to egg Yolk fat Calculator</p>
 <table>
   {% for field in form %}
     <tr>
@@ -10,6 +15,7 @@
     </tr>
   {% endfor %}
 </table>
+</font>
 <p><input type=submit value=Compute></form></p>
 
 <p>
@@ -18,3 +24,4 @@
 <img src="{% get_static_prefix %}{{ result }}" width=500>
 {% endif %}
 </p>
+</body>
