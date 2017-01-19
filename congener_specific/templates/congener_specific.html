@@ -15,7 +15,7 @@
 		<h1>Dioxin Transfer from feed to egg Yolk fat Calculator</h1>
 <div class="row">
 <div class="col-sm-5" style="background-color:#F5F7FA;">
-<h2><p>Predicted dioxin concentrations egg yolk:</p></h2>
+<h2><p>Predicted dioxin concentrations in egg yolk:</p></h2>
 
 <div>
 {% if result != None %}
@@ -24,13 +24,14 @@
 </div>
 
 <H3>Options:</h3>
-<a href="{% url 'index' %}" class="btn btn-default" role="button">Reset</a>
-<a href="{% url 'congener_specific' %}" class="btn btn-default" role="button">Congener specific models</a>
+
+<a href="{% url 'congener_specific' %}" class="btn btn-default" role="button">Reset</a>
+<a href="{% url 'index' %}" class="btn btn-default" role="button">Total teq model</a>
 
 </div>
 
 <div class="col-sm-5" style="background-color:#E6E9ED;">
-<h2>Feed contamination (ng total teq/kg):</h2>
+<h2>Congener specific contamination feed (ng teq/kg feed):</h2>
 <table>
   {% for field in form %}
     <tr>
