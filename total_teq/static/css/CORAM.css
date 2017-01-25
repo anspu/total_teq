@@ -1,5 +1,5 @@
 h1 {
-    color: rgb(7, 72, 180);
+    color: rgb(255, 255,255);
     font-size: 25px;
 }
 
@@ -15,4 +15,22 @@ h3 {
 
 body {
     padding-left: 30px;
+}
+
+img {
+    width: 100%;
+}
+
+.image-container {
+  position: relative;
+  padding-bottom: 80%; /* ratio of image height to width */
+  height: 0;
+  overflow: hidden;
+}
+ 
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
