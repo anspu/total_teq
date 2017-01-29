@@ -8,6 +8,7 @@ from scipy.integrate import odeint
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import numpy as np
 import sys
 import os, time, glob
@@ -39,12 +40,16 @@ def main(contamination_level,feed_intake,exposure_time):
         return [dAcdt,dAfdt,dAeggdt]
     
 
-    timeGrid = np.arange(0,200,0.01)
+    timeGrid = np.arange(0,250,0.01)
+    delay = np.arange(1,251,0.01)
     GivenDose = (GivenDose,)
     yinit = np.array([0.0,0.0,0.0])
     y = odeint (myModel, yinit, timeGrid, GivenDose)
     plt.figure()
-    plt.plot(timeGrid, y[:,2]/Vegg) # y[:,0] is the first column of y
+    plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
+    plt.xlim(0, 250)
+    blue_patch = mpatches.Patch(color='blue', label='Total teq model')
+    plt.legend(handles=[blue_patch,])
     plt.xlabel('time (days)')
     plt.ylabel('Cegg (pg TEQ/g yolk fat)')
     if not os.path.isdir('static'):

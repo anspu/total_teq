@@ -3,59 +3,56 @@
 
 <html>  
 	<head>
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">	
-		<link rel="stylesheet" type="text/css" href="{% static 'css/CORAM.css' %}"/>
-		<title>Dioxin eggs</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">	
+	<link rel="stylesheet" type="text/css" href="{% static 'css/CORAM.css' %}"/>
+	<title>Dioxin eggs</title>
 	</head>
 
    
-	<body>
+<body>
 <div class="container-fluid">
-<div class="row">
-<div class="col-lg-10" style="background-color:#5492CF;">
-<h1>Dioxin Transfer from feed to egg Yolk fat Calculator</h1>
-</div>
-</div>
+	<div class="row">
+		<div class="col-xs-11 col-lg-9" style="background-color:#5492CF;">
+		<h1>Dioxin Transfer from feed to egg Yolk fat Calculator</h1>
+		</div>
+	</div>
 
-		
-<div class="row">
-<div class="col-lg-5" style="background-color:#E6E6E6;">
+	<div class="row">
+		<div class="col-xs-6 col-lg-5" style="background-color:#E6E6E6;">
+		<h2><p>Predicted dioxin concentrations egg yolk:</p></h2>
+			<div class="image-container">
+			{% if result != None %}
+			<img src="{% get_static_prefix %}{{ result }}">
+			{% endif %}
+			</div>
+		</div>
 
-<h2><p>Predicted dioxin concentrations egg yolk:</p></h2>
-<div class="image-container">
-{% if result != None %}
-<img src="{% get_static_prefix %}{{ result }}">
-{% endif %}
+		<div class="col-xs-5 col-lg-4" style="background-color:#A6A6A6;">
+		<h2>Input values*:</h2>
+		<h3>*Congener specific contamination expressed as ng/kg feed</h3>
+		<table>
+ 		{% for field in form %}
+    		<tr>
+    		<td>{{ field.label }}</td>
+		<td>{{ field }}</td>
+    		<td>{{ field.errors }}</td>
+    		<td></td>
+    		</tr>
+  		{% endfor %}
+		</table>
+		<p><input type=submit value=Compute></form></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-11 col-lg-9" style="background-color:#5492CF;">
+		<br/>
+		<a href="{% url 'congener_specific' %}" class="btn btn-default" role="button">Reset</a>
+		<a href="{% url 'index' %}" class="btn btn-default" role="button">Total Teq Model</a>
+		</div>
+	</div>
+
 </div>
-
-
-</div>
-
-<div class="col-lg-5" style="background-color:#A6A6A6;">
-<h2>Input values:</h2>
-<table>
-  {% for field in form %}
-    <tr>
-    <td>{{ field.name }}</td>
-    <td>{{ field }}</td>
-    <td>{{ field.label }}</td>
-    <td>{{ field.errors }}</td>
-    <td></td>
-    </tr>
-  {% endfor %}
-</table>
-<p><input type=submit value=Compute></form></p>
-
-</div>
-</div>
-<div class="row">
-<div class="col-lg-10" style="background-color:#5492CF;">
-<a href="{% url 'index' %}" class="btn btn-default" role="button">Reset</a>
-<a href="{% url 'congener_specific' %}" class="btn btn-default" role="button">Congener specific models</a>
-</div>
-</div>
-
-
 </body>
 </html>
