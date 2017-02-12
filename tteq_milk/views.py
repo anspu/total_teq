@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from total_teq.models import InputForm
-from total_teq.compute import main
+from tteq_milk.models import InputForm
+from tteq_milk.compute import main
 import os
 
 def total_teq(request):
@@ -16,4 +16,4 @@ def total_teq(request):
     else:
         form = InputForm()
     context = {'form': form,'result': result}
-    return render(request,'total_teq.html', context)
+    return render(request,'tteq_milk.html', context)

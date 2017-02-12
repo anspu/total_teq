@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'index',
     'total_teq',
     'congener_specific',
+    'tteq_milk',   
 ]
 
 MIDDLEWARE = [
@@ -121,5 +123,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'total_teq'),
+                    os.path.join(BASE_DIR, 'tteq_milk'),
                     os.path.join(BASE_DIR, 'congener_specific'),)
 STATIC_ROOT = ''

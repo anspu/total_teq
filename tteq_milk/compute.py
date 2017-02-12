@@ -13,16 +13,16 @@ import numpy as np
 import sys
 import os, time, glob
 
-qf = 0.06
-qc = 0.14
-yy = 0.051
-k = 0.007
-Fabs = 0.885
-e = 0.9
+qf = 0.0644
+qc = 0.338
+yy = 0.163
+k = 0.101
+Fabs = 0.415
+e = 1
 ey = e*yy
-Vf = 257.6
-Vc = 1840- Vf
-Vegg = 5.76
+Vf = 61000
+Vc = 450000- Vf
+Vegg = 1000
 
 def main(contamination_level,feed_intake,exposure_time):
 
@@ -51,7 +51,7 @@ def main(contamination_level,feed_intake,exposure_time):
     blue_patch = mpatches.Patch(color='blue', label='Total TEQ model')
     plt.legend(handles=[blue_patch,])
     plt.xlabel('time (days)')
-    plt.ylabel('Cegg (pg TEQ/g yolk fat)')
+    plt.ylabel('Cegg (pg TEQ/g milk fat)')
     if not os.path.isdir('static'):
             os.mkdir('static')
     else:

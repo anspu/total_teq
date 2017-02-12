@@ -1,0 +1,47 @@
+{% load static %}
+<form method=post action="">{% csrf_token %}
+
+<html>  
+	<head>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">	
+	<link rel="stylesheet" type="text/css" href="{% static 'css/CORAM.css' %}"/>
+	<title>Transfer models</title>
+	</head>
+
+   
+<body>
+<div class="container">
+
+<div class="col-lg-2 col-sm-6">
+<H2> DIOXIN </H2>
+</div>
+
+<div class="row">
+<div class="col-lg-2 col-sm-6 text-center">
+<p>
+<a href="{% url 'total_teq' %}">
+<img class="img-circle img-responsive img-center" src=  "{% static "img/1-1203254406i5t0.jpg" %}" alt="" style="border:1px solid black">
+</a>
+</p>
+
+<p>Dioxin Transfer to Egg Calculator
+</p>
+</div>
+
+<div class="col-lg-2 col-sm-6 text-center">
+<p>
+<a href="{% url 'tteq_milk' %}"> 
+<img class="img-circle img-responsive img-center" src=  "{% static "img/milk.png" %}" alt="" style="border:1px solid black">
+</a>
+</p>
+<p>Dioxin Transfer to Milk Calculator
+</p>
+</div>
+
+</div>
+
+
+</div>
+</body>
+</html>
