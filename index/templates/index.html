@@ -12,36 +12,27 @@
    
 <body>
 <div class="container">
+	<div class="row">
+		<div class="col-md-2 col-sm-5">
+		<H2> DIOXIN </H2>
+		</div>
 
-<div class="col-lg-2 col-sm-6">
-<H2> DIOXIN </H2>
-</div>
+		<div class="col-md-2 col-sm-5 text-center">
+		<a href="{% url 'total_teq' %}"> 
+		<img class="img-circle img-responsive img-center" src=  "{% static "img/1-1203254406i5t0.jpg" %}" alt="responsive image" style="border:1px solid black">
+		<p>Dioxin Transfer to Egg Calculator
+		</p>
+		</a>
+		</div>
 
-<div class="row">
-<div class="col-lg-2 col-sm-6 text-center">
-<p>
-<a href="{% url 'total_teq' %}">
-<img class="img-circle img-responsive img-center" src=  "{% static "img/1-1203254406i5t0.jpg" %}" alt="" style="border:1px solid black">
-</a>
-</p>
-
-<p>Dioxin Transfer to Egg Calculator
-</p>
-</div>
-
-<div class="col-lg-2 col-sm-6 text-center">
-<p>
-<a href="{% url 'tteq_milk' %}"> 
-<img class="img-circle img-responsive img-center" src=  "{% static "img/milk1.jpg" %}" alt="" style="border:1px solid black">
-</a>
-</p>
-<p>Dioxin Transfer to Milk Calculator
-</p>
-</div>
-
-</div>
-
-
+		<div class="col-md-2 col-sm-5 text-center">
+		<a href="{% url 'tteq_milk' %}"> 
+		<img class="img-circle img-responsive img-center" src=  "{% static "img/milk1.jpg" %}" alt="" style="border:1px solid black">
+		<p>Dioxin Transfer to Milk Calculator
+		</p>
+		</a>
+		</div>
+	</div>
 </div>
 </body>
 </html>

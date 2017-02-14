@@ -13,13 +13,13 @@
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-11 col-lg-12" style="background-color:#5492CF";>
+		<div class="col-sm-12 col-md-12" style="background-color:#5492CF";>
 		<h1>Dioxin Transfer from feed to Milk fat Calculator</h1>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-xs-6 col-lg-5" style="background-color:#E6E6E6;">
+		<div class="col-sm-5 col-md-5" style="background-color:#E6E6E6;">
 		<h2><p>Predicted dioxin concentration milk fat:</p></h2>
 			<div class="image-container">
 			{% if result != None %}
@@ -28,7 +28,7 @@
 			</div>
 		</div>
 
-		<div class="col-xs-5 col-lg-5" style="background-color:#A6A6A6;">
+		<div class="col-sm-5 col-md-5" style="background-color:#A6A6A6;">
 		<h2>Input values*:</h2>
 		<h3>*Feed contamination expressed as ng TEQ/kg feed</h3>
 		<table>
@@ -46,7 +46,7 @@
 
 
 <div class="row">
-	<div class="col-sm-6 col-lg-2 text-center">
+	<div class="col-sm-2 col-md-2 text-center">
 	<img class="img-circle img-responsive img-center" src=  "{% static "img/milk1.jpg" %}" alt="" style="border:1px solid black">
 	<h3>Dioxin to Milk </h3>
 	</div>
@@ -56,7 +56,7 @@
 
 
 	<div class="row">
-	<div class="col-xs-6 col-lg-12" style="background-color:#5492CF;">
+	<div class="col-sm-12 col-md-12" style="background-color:#5492CF;">
 	<br/>
 		<a href="{% url 'index' %}" class="btn btn-default" role="button">Home</a>
 		<a href="{% url 'tteq_milk' %}" class="btn btn-default" role="button">Reset</a>

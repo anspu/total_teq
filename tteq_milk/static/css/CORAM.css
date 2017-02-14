@@ -14,7 +14,6 @@ h3 {
 }
 
 
-
 .image-container {
   position: relative;
   padding-bottom: 80%; /* ratio of image height to width */
@@ -28,5 +27,7 @@ h3 {
   left: 0;
   width: 100%;
 }
+
+
 
 
