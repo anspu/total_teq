@@ -6,8 +6,10 @@ This is a temporary script file.
 """
 from scipy.integrate import odeint
 import matplotlib
-#matplotlib.use("Agg")
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import matplotlib.mlab as mlab
 import numpy as np
 import sys
 import os, time, glob
@@ -39,12 +41,22 @@ def main(contamination_level,feed_intake,exposure_time):
         return [dAcdt,dAfdt,dAeggdt]
     
 
-    timeGrid = np.arange(0,200,0.01)
+
+    timeGrid = np.arange(0,250,0.01)
+    delay = np.arange(1,251,0.01)
     GivenDose = (GivenDose,)
     yinit = np.array([0.0,0.0,0.0])
     y = odeint (myModel, yinit, timeGrid, GivenDose)
+    ind = mlab.cross_from_above(y[:,2]/Vegg, 5)
+    legal_lim = delay[ind]
     plt.figure()
-    plt.plot(timeGrid, y[:,2]/Vegg) # y[:,0] is the first column of y
+    plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
+    plt.vlines(delay[ind], 0, 6)    
+    #plt.plot([0, 250], [5, 5],'r')
+    plt.xlim(0, 250)
+    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model')
+    plt.legend(handles=[blue_patch,])
+    plt.title('legal_limit=%s' %(legal_lim))
     plt.xlabel('time (days)')
     plt.ylabel('Cegg (pg TEQ/g yolk fat)')
     if not os.path.isdir('static'):
@@ -58,6 +70,7 @@ def main(contamination_level,feed_intake,exposure_time):
         plotfile = os.path.join('static', str(time.time()) + '.png')
         plt.savefig(plotfile)
         return plotfile
+        
 pass
 if __name__ == '__main__':
     print (main(2, 5, 1))

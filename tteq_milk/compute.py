@@ -9,9 +9,11 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import matplotlib.mlab as mlab
 import numpy as np
 import sys
 import os, time, glob
+
 
 qf = 0.0644
 qc = 0.338
@@ -45,10 +47,14 @@ def main(contamination_level,feed_intake,exposure_time):
     GivenDose = (GivenDose,)
     yinit = np.array([0.0,0.0,0.0])
     y = odeint (myModel, yinit, timeGrid, GivenDose)
+    ind = mlab.cross_from_above(y[:,2]/Vegg, 5)
+    legal_lim = delay[ind]
     plt.figure()
     plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
+    plt.plot([0, 250], [5, 5],'r')
     plt.xlim(0, 250)
-    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model')
+    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model: %s days'%(legal_lim))
+    red_patch = mpatches.Patch(color='red', label='Legal limit')
     plt.legend(handles=[blue_patch,])
     plt.xlabel('time (days)')
     plt.ylabel('Cegg (pg TEQ/g milk fat)')

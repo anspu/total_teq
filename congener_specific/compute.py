@@ -9,6 +9,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import matplotlib.mlab as mlab
 import numpy as np
 import sys
 import os, time, glob
@@ -755,14 +756,21 @@ def main(feed_intake,exposure_time,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c1
                       0.0,0.0,0.0,
                       0.0,0.0,0.0,])
     (y,d) = odeint (myModel, yinit, timeGrid, GivenDose, full_output=1)
+    ind = mlab.cross_from_above(y[:,2]/Vegg, 5)
+    legal_lim = delay[ind]
+    ind1 = mlab.cross_from_above((y[:,5]+y[:,8]+y[:,11]+y[:,14]+y[:,17]+y[:,20]+y[:,23]+y[:,26]+y[:,29]+y[:,32]+y[:,35]+y[:,38]+y[:,41]+y[:,44]+y[:,47]+y[:,50]+y[:,53]+y[:,56]+y[:,59]
+                     +y[:,62]+y[:,65]+y[:,68]+y[:,71]+y[:,74]+y[:,77]+y[:,80]+y[:,83]+y[:,86]+y[:,89])/Vegg, 5)
+    legal_lim1 = delay[ind1]
     plt.figure()
     plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
+    plt.plot([0, 250], [5, 5],'r')
     plt.plot(delay, (y[:,5]+y[:,8]+y[:,11]+y[:,14]+y[:,17]+y[:,20]+y[:,23]+y[:,26]+y[:,29]+y[:,32]+y[:,35]+y[:,38]+y[:,41]+y[:,44]+y[:,47]+y[:,50]+y[:,53]+y[:,56]+y[:,59]
                      +y[:,62]+y[:,65]+y[:,68]+y[:,71]+y[:,74]+y[:,77]+y[:,80]+y[:,83]+y[:,86]+y[:,89])/Vegg)
     plt.xlim(0, 250)
-    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model')
-    green_patch = mpatches.Patch(color='green', label='Sum of congener specific models')
-    plt.legend(handles=[blue_patch, green_patch])
+    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model: %s days'%(legal_lim))
+    green_patch = mpatches.Patch(color='green', label='Sum congener spec. %s days'%(legal_lim1))
+    red_patch = mpatches.Patch(color='red', label='Legal limit'%(legal_lim1))
+    plt.legend(handles=[blue_patch, green_patch, red_patch])
     plt.xlabel('time (days)')
     plt.ylabel('Cegg (pg TEQ/g yolk fat)')
     

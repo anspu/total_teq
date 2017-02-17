@@ -3,6 +3,7 @@ from total_teq.models import InputForm
 from total_teq.compute import main
 import os
 
+
 def total_teq(request):
     os.chdir(os.path.dirname(__file__))
     result = None
