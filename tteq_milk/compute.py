@@ -43,17 +43,17 @@ def main(contamination_level,feed_intake,exposure_time):
     
 
     timeGrid = np.arange(0,250,0.01)
-    delay = np.arange(1,251,0.01)
+    delay = np.arange(0,250,0.01)
     GivenDose = (GivenDose,)
     yinit = np.array([0.0,0.0,0.0])
     y = odeint (myModel, yinit, timeGrid, GivenDose)
-    ind = mlab.cross_from_above(y[:,2]/Vegg, 5)
+    ind = mlab.cross_from_above(y[:,2]/Vegg, 3)
     legal_lim = delay[ind]
     plt.figure()
     plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
-    plt.plot([0, 250], [5, 5],'r')
+    plt.plot([0, 250], [3, 3],'r')
     plt.xlim(0, 250)
-    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model: %s days'%(legal_lim))
+    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model \n%s days till EU-limit'%(legal_lim))
     red_patch = mpatches.Patch(color='red', label='Legal limit')
     plt.legend(handles=[blue_patch,])
     plt.xlabel('time (days)')

@@ -25,7 +25,7 @@ class Input(models.Model):
     c9 = models.FloatField(
         verbose_name= '9: 1,2,3,4,7,8,9-HpCDF', default=0.0)
     c10 = models.FloatField(
-        verbose_name= '10: OCDF', default=0.0)
+        verbose_name= '10: 1,2,3,4,6,7,8,9-OCDF', default=0.0)
     c11 = models.FloatField(
         verbose_name= '11: 2,3,7,8-TCDD', default=0.0)
     c12 = models.FloatField(

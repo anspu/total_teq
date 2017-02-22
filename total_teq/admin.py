@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Feedregime
+from .models import Ingredients
 
-# Register your models here.
+admin.site.register(Feedregime)
+admin.site.register(Ingredients)

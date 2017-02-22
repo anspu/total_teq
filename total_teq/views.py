@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from total_teq.models import InputForm
 from total_teq.compute import main
+from django.views.generic import ListView
+from total_teq.models import Feedregime
 import os
 
+class Feed_Regimes(ListView):
+        model = Feedregime
 
 def total_teq(request):
     os.chdir(os.path.dirname(__file__))
