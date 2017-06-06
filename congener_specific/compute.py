@@ -566,7 +566,35 @@ def main(feed_intake,exposure_time,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c1
                 GivenDose_c29 = 0
         return  GivenDose_c29
   
-
+    def  ML():
+        if c18 > 0:
+                ML = 5
+        elif c19 > 0:
+               ML = 5
+        elif c20 > 0:
+               ML = 5
+        elif c21 > 0:
+               ML = 5
+        elif c22 > 0:
+               ML = 5
+        elif c23 > 0:
+               ML = 5
+        elif c24 > 0:
+               ML = 5
+        elif c25 > 0:
+               ML = 5
+        elif c26 > 0:
+               ML = 5
+        elif c27 > 0:
+               ML = 5
+        elif c28 > 0:
+               ML = 5
+        elif c29 > 0:
+               ML = 5
+        else: 
+               ML =2.5
+        return ML
+        
     def myModel (y,t,GivenDose):
         dAcdt = Fabs*GivenDose(t)-(qc + k + ey)*y[0]+ qf*y[1]
         dAfdt = qc*y[0]-qf*y[1] 
@@ -756,14 +784,14 @@ def main(feed_intake,exposure_time,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c1
                       0.0,0.0,0.0,
                       0.0,0.0,0.0,])
     (y,d) = odeint (myModel, yinit, timeGrid, GivenDose, full_output=1)
-    ind = mlab.cross_from_above(y[:,2]/Vegg, 3)
+    ind = mlab.cross_from_above(y[:,2]/Vegg, ML())
     legal_lim = delay[ind]
     ind1 = mlab.cross_from_above((y[:,5]+y[:,8]+y[:,11]+y[:,14]+y[:,17]+y[:,20]+y[:,23]+y[:,26]+y[:,29]+y[:,32]+y[:,35]+y[:,38]+y[:,41]+y[:,44]+y[:,47]+y[:,50]+y[:,53]+y[:,56]+y[:,59]
                      +y[:,62]+y[:,65]+y[:,68]+y[:,71]+y[:,74]+y[:,77]+y[:,80]+y[:,83]+y[:,86]+y[:,89])/Vegg, 3)
     legal_lim1 = delay[ind1]
     plt.figure()
     plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
-    plt.plot([0, 250], [3, 3],'r')
+    plt.plot([0, 250], [ML(), ML()],'r')
     plt.plot(delay, (y[:,5]+y[:,8]+y[:,11]+y[:,14]+y[:,17]+y[:,20]+y[:,23]+y[:,26]+y[:,29]+y[:,32]+y[:,35]+y[:,38]+y[:,41]+y[:,44]+y[:,47]+y[:,50]+y[:,53]+y[:,56]+y[:,59]
                      +y[:,62]+y[:,65]+y[:,68]+y[:,71]+y[:,74]+y[:,77]+y[:,80]+y[:,83]+y[:,86]+y[:,89])/Vegg)
     plt.xlim(0, 250)
