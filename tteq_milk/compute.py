@@ -17,16 +17,14 @@ import os, time, glob
 
 qf = 0.0644
 qc = 0.338
-yy = 0.163
 k = 0.101
 Fabs = 0.415
 e = 1
-ey = e*yy
 Vf = 61000
 Vc = 450000- Vf
-Vegg = 1000
+#Vmilk = 1000
 
-def main(contamination_level,contamination_levelPCB,feed_intake,exposure_time):
+def main(contamination_level,contamination_levelPCB,feed_intake,exposure_time, depletion_time, milk_production):
 
     def GivenDose(t):
         if t <= exposure_time:
@@ -43,23 +41,28 @@ def main(contamination_level,contamination_levelPCB,feed_intake,exposure_time):
     
     def  ML():
         if contamination_levelPCB > 0:
-                ML = 5
+                ML = 5.5
         else:
                ML = 2.5
         return ML
-
-    timeGrid = np.arange(0,250,0.01)
-    delay = np.arange(0,250,0.01)
+    
+    yy = 0.163*milk_production*0.04 
+    ey = e*yy
+    Vmilk = milk_production*0.04*1000        
+    stopTime= exposure_time + depletion_time
+    delayStopTime = stopTime+0
+    timeGrid = np.arange(0,stopTime,0.01)
+    delay = np.arange(0,delayStopTime,0.01)
     GivenDose = (GivenDose,)
     yinit = np.array([0.0,0.0,0.0])
     y = odeint (myModel, yinit, timeGrid, GivenDose)
-    ind = mlab.cross_from_above(y[:,2]/Vegg, ML())
-    legal_lim = delay[ind]
+    ind = mlab.cross_from_above(y[:,2]/Vmilk, ML())
+    legal_lim = np.round(delay[ind]-exposure_time, decimals = 0)
     plt.figure()
-    plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
-    plt.plot([0, 250], [ML(), ML()],'r')
-    plt.xlim(0, 250)
-    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model \n%s days till EU-limit'%(legal_lim))
+    plt.plot(delay, y[:,2]/Vmilk) # y[:,0] is the first column of y
+    plt.plot([0, stopTime], [ML(), ML()],'r')
+    plt.xlim(0, stopTime)
+    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model: \n%s days between \nlast exposure and EU-limit'%(legal_lim))
     red_patch = mpatches.Patch(color='red', label='EU-limit')
     plt.legend(handles=[blue_patch,red_patch])
     plt.xlabel('time (days)')
@@ -77,4 +80,4 @@ def main(contamination_level,contamination_levelPCB,feed_intake,exposure_time):
         return plotfile
 pass
 if __name__ == '__main__':
-    int(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    int(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])

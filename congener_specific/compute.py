@@ -348,7 +348,7 @@ Vc_c29 = 1840-Vf_c29
 
 
 
-def main(feed_intake,exposure_time,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29):
+def main(feed_intake,exposure_time,depletion_time,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29):
 
     contamination_level = (c1*tef_c1+c2*tef_c2+c3*tef_c3+c4*tef_c4+c5*tef_c5
     +c6*tef_c6+c7*tef_c7+c8*tef_c8+c9*tef_c9+c10*tef_c10+c11*tef_c11+c12*tef_c12
@@ -749,9 +749,10 @@ def main(feed_intake,exposure_time,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c1
                 dAcdt29,dAfdt29,dAeggdt29,
                 ]
         
-
-    timeGrid = np.arange(0,250,0.01)
-    delay = np.arange(1.5,251.5,.01)
+    stopTime= exposure_time + depletion_time
+    delayStopTime = stopTime+1.5
+    timeGrid = np.arange(0,stopTime,0.01)
+    delay = np.arange(1.5,delayStopTime,.01)
     GivenDose = (GivenDose,)
     yinit = np.array([0.0,0.0,0.0,
                       0.0,0.0,0.0,
@@ -785,18 +786,18 @@ def main(feed_intake,exposure_time,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c1
                       0.0,0.0,0.0,])
     (y,d) = odeint (myModel, yinit, timeGrid, GivenDose, full_output=1)
     ind = mlab.cross_from_above(y[:,2]/Vegg, ML())
-    legal_lim = delay[ind]
+    legal_lim = np.round(delay[ind]-exposure_time, decimals = 0)
     ind1 = mlab.cross_from_above((y[:,5]+y[:,8]+y[:,11]+y[:,14]+y[:,17]+y[:,20]+y[:,23]+y[:,26]+y[:,29]+y[:,32]+y[:,35]+y[:,38]+y[:,41]+y[:,44]+y[:,47]+y[:,50]+y[:,53]+y[:,56]+y[:,59]
-                     +y[:,62]+y[:,65]+y[:,68]+y[:,71]+y[:,74]+y[:,77]+y[:,80]+y[:,83]+y[:,86]+y[:,89])/Vegg, 3)
-    legal_lim1 = delay[ind1]
+                     +y[:,62]+y[:,65]+y[:,68]+y[:,71]+y[:,74]+y[:,77]+y[:,80]+y[:,83]+y[:,86]+y[:,89])/Vegg, ML())
+    legal_lim1 = np.round(delay[ind1]-exposure_time, decimals = 0)
     plt.figure()
     plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
-    plt.plot([0, 250], [ML(), ML()],'r')
+    plt.plot([0, stopTime], [ML(), ML()],'r')
     plt.plot(delay, (y[:,5]+y[:,8]+y[:,11]+y[:,14]+y[:,17]+y[:,20]+y[:,23]+y[:,26]+y[:,29]+y[:,32]+y[:,35]+y[:,38]+y[:,41]+y[:,44]+y[:,47]+y[:,50]+y[:,53]+y[:,56]+y[:,59]
                      +y[:,62]+y[:,65]+y[:,68]+y[:,71]+y[:,74]+y[:,77]+y[:,80]+y[:,83]+y[:,86]+y[:,89])/Vegg)
-    plt.xlim(0, 250)
-    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model \n%s days till EU-limit'%(legal_lim))
-    green_patch = mpatches.Patch(color='green', label='Sum congener spec. \n%s days till EU-limit'%(legal_lim1))
+    plt.xlim(0, stopTime)
+    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model: \n%s days between \nlast exposure and EU-limit'%(legal_lim))
+    green_patch = mpatches.Patch(color='green', label='Sum congener spec: \n%s days between \nlast exposure and EU-limit'%(legal_lim1))
     red_patch = mpatches.Patch(color='red', label='EU-limit'%(legal_lim1))
     plt.legend(handles=[blue_patch, green_patch, red_patch])
     plt.xlabel('time (days)')
@@ -822,4 +823,4 @@ if __name__ == '__main__':
         sys.argv[13], sys.argv[14], sys.argv[15], sys.argv[16], sys.argv[17], sys.argv[18],
         sys.argv[19],sys.argv[20], sys.argv[21],sys.argv[22],
         sys.argv[23], sys.argv[24], sys.argv[25],sys.argv[26],
-        sys.argv[27], sys.argv[28], sys.argv[29], sys.argv[30], sys.argv[31])
+        sys.argv[27], sys.argv[28], sys.argv[29], sys.argv[30], sys.argv[31], sys.argv[32])

@@ -25,7 +25,7 @@ Vf = 257.6
 Vc = 1840- Vf
 Vegg = 5.76
 
-def main(contamination_level,contamination_levelPCB,feed_intake,exposure_time):
+def main(contamination_level,contamination_levelPCB,feed_intake,exposure_time,depletion_time):
     
     def GivenDose(t):
         if t <= exposure_time:
@@ -46,19 +46,21 @@ def main(contamination_level,contamination_levelPCB,feed_intake,exposure_time):
         else:
                ML = 2.5
         return ML
-                
-    timeGrid = np.arange(0,250,0.01)
-    delay = np.arange(1.5,251.5,0.01)
+    
+    stopTime= exposure_time + depletion_time
+    delayStopTime = stopTime+1.5
+    timeGrid = np.arange(0,stopTime,0.01)
+    delay = np.arange(1.5,delayStopTime,0.01)
     GivenDose = (GivenDose,)
     yinit = np.array([0.0,0.0,0.0])
     y = odeint (myModel, yinit, timeGrid, GivenDose)
     ind = mlab.cross_from_above(y[:,2]/Vegg, ML())
-    legal_lim = delay[ind]
+    legal_lim = np.round(delay[ind]-exposure_time, decimals = 0)
     plt.figure()
     plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
-    plt.plot([0, 250], [ML(), ML()],'r')
-    plt.xlim(0, 250)
-    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model \n%s days till EU-limit'%(legal_lim))
+    plt.plot([0, stopTime], [ML(), ML()],'r')
+    plt.xlim(0, stopTime)
+    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model: \n%s days between \nlast exposure and EU-limit'%(legal_lim))
     red_patch = mpatches.Patch(color='red', label='EU-limit')
     plt.legend(handles=[blue_patch,red_patch])
     plt.xlabel('time (days)')
@@ -77,4 +79,4 @@ def main(contamination_level,contamination_levelPCB,feed_intake,exposure_time):
         return plotfile
 pass
 if __name__ == '__main__':
-    int(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    int(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

@@ -10,7 +10,7 @@ def total_teq(request):
         form = InputForm(request.POST)
         if form.is_valid():
             form2 = form.save(commit=False)
-            result = main(form2.contamination_level,form2.contamination_levelPCB,form2.feed_intake, form2.exposure_time)
+            result = main(form2.contamination_level,form2.contamination_levelPCB,form2.feed_intake, form2.exposure_time, form2.depletion_time, form2.milk_production)
             result = result.replace('static/', '')
             
     else:

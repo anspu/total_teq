@@ -3,9 +3,11 @@ from django.forms import ModelForm
 
 class Input(models.Model):
     feed_intake = models.FloatField(
-        verbose_name= 'feed intake (kg feed/day)', default=0.116)
+        verbose_name= 'feed intake (kg dm/day)', default=0.116)
     exposure_time = models.FloatField(
         verbose_name= 'exposure time (days)', default=0.0)
+    depletion_time = models.FloatField(
+        verbose_name= 'depletion time (days)', default=0.0)
     c1 = models.FloatField(
         verbose_name= '1: 2,3,7,8-TCDF', default=0.0)
     c2 = models.FloatField(
@@ -72,4 +74,4 @@ class Input(models.Model):
 class InputForm(ModelForm):
     class Meta:
         model = Input
-        fields = ['feed_intake','exposure_time','c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11','c12','c13','c14','c15','c16','c17','c18','c19','c20','c21','c22','c23','c24','c25','c26','c27','c28','c29',]
+        fields = ['feed_intake','exposure_time','depletion_time','c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11','c12','c13','c14','c15','c16','c17','c18','c19','c20','c21','c22','c23','c24','c25','c26','c27','c28','c29',]
