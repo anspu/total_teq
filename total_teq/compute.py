@@ -60,7 +60,7 @@ def main(contamination_level,contamination_levelPCB,feed_intake,exposure_time,de
     plt.plot(delay, y[:,2]/Vegg) # y[:,0] is the first column of y
     plt.plot([0, stopTime], [ML(), ML()],'r')
     plt.xlim(0, stopTime)
-    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model: \n%s days between \nlast exposure and EU-limit'%(legal_lim))
+    blue_patch = mpatches.Patch(color='blue', label='Total TEQ model: \n%s days till EU-limit \n after last exposure'%(legal_lim))
     red_patch = mpatches.Patch(color='red', label='EU-limit')
     plt.legend(handles=[blue_patch,red_patch])
     plt.xlabel('time (days)')
