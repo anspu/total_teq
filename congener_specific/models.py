@@ -7,7 +7,7 @@ class Input(models.Model):
     exposure_time = models.FloatField(
         verbose_name= 'exposure time (days)', default=0.0)
     depletion_time = models.FloatField(
-        verbose_name= 'depletion time (days)', default=0.0)
+        verbose_name= 'depletion time (days)', default=100.0)
     c1 = models.FloatField(
         verbose_name= '1: 2,3,7,8-TCDF', default=0.0)
     c2 = models.FloatField(
@@ -27,7 +27,7 @@ class Input(models.Model):
     c9 = models.FloatField(
         verbose_name= '9: 1,2,3,4,7,8,9-HpCDF', default=0.0)
     c10 = models.FloatField(
-        verbose_name= '10: 1,2,3,4,6,7,8,9-OCDF', default=0.0)
+        verbose_name = '10: 1,2,3,4,6,7,8,9-OCDF \b \n (not available yet, remains zero)', default=0.0)
     c11 = models.FloatField(
         verbose_name= '11: 2,3,7,8-TCDD', default=0.0)
     c12 = models.FloatField(
@@ -39,9 +39,9 @@ class Input(models.Model):
     c15 = models.FloatField(
         verbose_name= '15: 1,2,3,7,8,9-HxCDD', default=0.0)
     c16 = models.FloatField(
-        verbose_name= '16: 1,2,3,4,6,7,8-HpCDD', default=0.0)
+        verbose_name= '16: 1,2,3,4,6,7,8-HpCDD \b (not available yet, remains zero)', default=0.0)
     c17 = models.FloatField(
-        verbose_name= '17: 1,2,3,4,6,7,8,9-OCDD', default=0.0)
+        verbose_name= '17: 1,2,3,4,6,7,8,9-OCDD (not available yet, remains zero)', default=0.0)
     c18 = models.FloatField(
         verbose_name= "18: 3,4,4',5-TCB (PCB 81)", default=0.0)
     c19 = models.FloatField(

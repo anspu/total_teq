@@ -11,7 +11,7 @@ class Input(models.Model):
     exposure_time = models.FloatField(
         verbose_name= 'exposure time (days)', default=0.0)
     depletion_time = models.FloatField(
-        verbose_name= 'depletion time (days)', default=0.0)
+        verbose_name= 'depletion time (days)', default=100.0)
     milk_production = models.FloatField(
         verbose_name= 'milk production (l/day)', default=25)
 
